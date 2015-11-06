@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -22,33 +23,36 @@
     <th>土
     </th>
 <script type="text/javascript">
-    printCalendar(2015,6);
-    printCalendar(2015,7);
-    printCalendar(2015,8);
-    printCalendar(2015,9);
+    $(function() { // jQueryで今日の日付の背景を赤にします
+        var today = new Date();
+        $('#'+ today.getDate()  +'').css('background-color', 'red');
+    });
     printCalendar(2015,10);
     function printCalendar(year, month) {
         var firstDay = new Date(year, month, 1);
         var firstDOW = firstDay.getDay(); // DOW: Day Of the Week
         var d = 1; // セルに書き出す日付
         var dow = 0; // セルに書き出す日の曜日
-        while (d <= 7) {
+
+        var lastDay = new Date(year, month+1, 0);
+        while (d <= lastDay.getDate()) {
             if (dow == 0) {
                 document.write('<tr>');
             }
-            document.write('<td>');
+            document.write('<td ');
             if (firstDOW > 0) { // 日曜日以外から始まってるよ
-                document.write('-');
+                document.write('>-');
                 firstDOW--;
             } else {
-                document.write(d);
+                document.write('id='+ d + '>' + d);
                 d++;
             }
             document.write('</td>');
-            if (dow == 6) { //土曜日の場合
+            dow++;
+            if (dow == 7) { //土曜日の場合
+                dow = 0;
                 document.write('</tr>');
             }
-            dow++;
         }
     }
 </script>

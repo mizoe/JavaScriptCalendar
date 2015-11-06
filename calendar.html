@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<table border="1">
+    <th>日
+    </th>
+    <th>月
+    </th>
+    <th>火
+    </th>
+    <th>水
+    </th>
+    <th>木
+    </th>
+    <th>金
+    </th>
+    <th>土
+    </th>
+<script type="text/javascript">
+    printCalendar(2015,6);
+    printCalendar(2015,7);
+    printCalendar(2015,8);
+    printCalendar(2015,9);
+    printCalendar(2015,10);
+    function printCalendar(year, month) {
+        var firstDay = new Date(year, month, 1);
+        var firstDOW = firstDay.getDay(); // DOW: Day Of the Week
+        var d = 1; // セルに書き出す日付
+        var dow = 0; // セルに書き出す日の曜日
+        while (d <= 7) {
+            if (dow == 0) {
+                document.write('<tr>');
+            }
+            document.write('<td>');
+            if (firstDOW > 0) { // 日曜日以外から始まってるよ
+                document.write('-');
+                firstDOW--;
+            } else {
+                document.write(d);
+                d++;
+            }
+            document.write('</td>');
+            if (dow == 6) { //土曜日の場合
+                document.write('</tr>');
+            }
+            dow++;
+        }
+    }
+</script>
+</table>
+</body>
+</html>
